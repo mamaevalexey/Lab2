@@ -1,4 +1,10 @@
 package ru.highload.airports;
 
-public class AirportMapper {
+import org.apache.hadoop.mapreduce.Mapper;
+
+public class AirportMapper extends Mapper<> {
+    @Override
+    protected void map(){
+        
+    }
 }
