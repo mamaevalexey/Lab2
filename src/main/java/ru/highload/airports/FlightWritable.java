@@ -4,6 +4,7 @@ import org.apache.hadoop.io.Text;
 
 public class FlightWritable {
     int destAirportID;
+    int
 
     public FlightWritable(Text text) {
         String[] cols = text.toString().split(",");
@@ -14,7 +15,7 @@ public class FlightWritable {
         } else {
             destAirportID = Integer.parseInt(destAirport);
         }
-        if (destAirport.equals("DEST_AIRPORT_ID")) {
+        if (delay.equals("ARR_DELAY")) {
             destAirportID = -1;
         } else {
             destAirportID = Integer.parseInt(destAirport);
