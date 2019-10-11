@@ -7,7 +7,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class FlightWritable extends Writable {
+public class FlightWritable implements Writable {
     private int destAirportID;
     private float delayTime;
 
