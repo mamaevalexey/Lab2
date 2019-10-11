@@ -8,5 +8,8 @@ public class AirportMapper extends Mapper<LongWritable, Text, AirportWritable, T
     @Override
     protected void map(LongWritable key, Text value, Context context){
         AirportWritable airport = new AirportWritable(value);
+
+        if (airport.getAirportID() != -1)
+            context.write(airport, new Text(airport.getAirportName()));
     }
 }
