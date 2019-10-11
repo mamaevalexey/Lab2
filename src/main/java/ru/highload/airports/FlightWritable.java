@@ -25,6 +25,8 @@ public class FlightWritable implements Writable {
             delayTime = -1;
         } else {
             delayTime = Float.parseFloat(destAirport);
+            if (delayTime == 0.0)
+                delayTime = -1;
         }
     }
 
