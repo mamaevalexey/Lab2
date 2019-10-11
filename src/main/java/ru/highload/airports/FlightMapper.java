@@ -4,9 +4,9 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class FlightMapper extends Mapper<LongWritable, Text, FlightWritable, > {
+public class FlightMapper extends Mapper<LongWritable, Text, FlightWritable, Text> {
     @Override
-    protected void map(){
-
+    protected void map(LongWritable key, Text value, Context context){
+        
     }
 }
