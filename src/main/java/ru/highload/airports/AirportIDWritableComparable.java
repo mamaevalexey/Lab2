@@ -1,17 +1,16 @@
 package ru.highload.airports;
 
-import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.io.WritableComparable;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class AirportIDWritable implements WritableComparable<AirportIDWritable> {
+public class AirportIDWritableComparable implements WritableComparable<AirportIDWritableComparable> {
     private int airportID;
     private int dataSet; // 0 for airport, 1 for flight
 
-    public AirportIDWritable(int airportID) {
+    public AirportIDWritableComparable(int airportID) {
         this.airportID = airportID;
     }
 
@@ -20,9 +19,10 @@ public class AirportIDWritable implements WritableComparable<AirportIDWritable> 
     }
 
     @Override
-    public int compareTo(AirportIDWritable o) {
+    public int compareTo(AirportIDWritableComparable o) {
+        if (airportID == o.airportID)
+            return dataSet - o.dataSet;
         return airportID - o.airportID;
-        //TODO: DATA?
     }
 
     @Override
