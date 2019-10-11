@@ -12,7 +12,8 @@ public class AirportMapper extends Mapper<LongWritable, Text, AirportIDWritableC
         AirportWritable airport = new AirportWritable(value);
 
         if (airport.getAirportID() != -1) {
-            context.write(new AirportIDWritableComparable(airport.getAirportID(), 0), new Text(airport.getAirportName()));
+            context.write(new AirportIDWritableComparable(airport.getAirportID(), 0),
+                    new Text(airport.getAirportName()));
         }
     }
 }
