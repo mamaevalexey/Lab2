@@ -6,6 +6,6 @@ import org.apache.hadoop.mapreduce.lib.partition.HashPartitioner;
 public class AirportPartitioner extends HashPartitioner<AirportIDWritableComparable, Text> {
     @Override
     public int getPartition(AirportIDWritableComparable key, Text value, int numReduceTasks) {
-        return key.getAirportID()
+        return Integer.valueOf(key.getAirportID()).hashCode()
     }
 }
