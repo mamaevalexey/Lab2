@@ -14,13 +14,14 @@ public class FlightWritable implements Writable {
     public FlightWritable(Text text) {
         String[] cols = text.toString().split(",");
         String destAirport = cols[14].replaceAll("\"", "");
-        String delay = cols[17].replaceAll("\"", "");
+        String delay = cols[18].replaceAll("\"", "");
+        String cancelled = cols[19].replaceAll("\"", "");
         if (destAirport.equals("DEST_AIRPORT_ID")) {
             destAirportID = -1;
         } else {
             destAirportID = Integer.parseInt(destAirport);
         }
-        if (delay.equals("ARR_DELAY")) {
+        if (delay.equals("ARR_DELAY_NEW") || delay.equals("") || Float.parseFloat(cancelled) == 1.0) {
             delayTime = -1;
         } else {
             delayTime = Float.parseFloat(destAirport);
