@@ -10,7 +10,8 @@ public class AirportIDWritableComparable implements WritableComparable<AirportID
     private int airportID;
     private int dataSet; // 0 for airport, 1 for flight
 
-    public AirportIDWritableComparable(){}
+    public AirportIDWritableComparable() {
+    }
 
     public AirportIDWritableComparable(int airportID, int dataSet) {
         this.airportID = airportID;
@@ -22,9 +23,6 @@ public class AirportIDWritableComparable implements WritableComparable<AirportID
         return (airportID < o.airportID ? -1 :
                 (airportID > o.airportID ? 1 :
                         Integer.compare(dataSet, o.dataSet)));
-        /*if (airportID == o.airportID)
-            return dataSet - o.dataSet;
-        return airportID - o.airportID;*/
     }
 
     public int getAirportID() {
