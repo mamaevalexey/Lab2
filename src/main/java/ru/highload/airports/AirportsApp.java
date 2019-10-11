@@ -19,7 +19,7 @@ public class AirportsApp {
         MultipleInputs.addInputPath(job, new Path(args[1]), TextInputFormat.class, AirportMapper.class);
         FileOutputFormat.setOutputPath(job, new Path(args[2]));
 
-        job.setPartitionerClass(AirportIDWritableComparable.class);
+        job.setPartitionerClass(AirportPartitioner.class);
         job.setGroupingComparatorClass(AirportIDComparator.class);
         job.setReducerClass(AirportReducer.class);
         job.setMapOutputKeyClass(Text.class);
