@@ -9,7 +9,7 @@ public class FlightMapper extends Mapper<LongWritable, Text, FlightWritable, Tex
     protected void map(LongWritable key, Text value, Context context){
         FlightWritable flight = new FlightWritable(value);
         if (flight.getDestAirportID() != -1 && flight.getDelayTime() != -1) {
-            context.write();
+            context.write(flight, new Text(flight.getDelayTime()));
         }
     }
 }
