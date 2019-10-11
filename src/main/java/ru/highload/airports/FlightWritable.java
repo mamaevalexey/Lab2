@@ -3,8 +3,8 @@ package ru.highload.airports;
 import org.apache.hadoop.io.Text;
 
 public class FlightWritable {
-    int destAirportID;
-    int
+    private int destAirportID;
+    private float delayTime;
 
     public FlightWritable(Text text) {
         String[] cols = text.toString().split(",");
@@ -16,9 +16,11 @@ public class FlightWritable {
             destAirportID = Integer.parseInt(destAirport);
         }
         if (delay.equals("ARR_DELAY")) {
-            destAirportID = -1;
+            delayTime = -1;
         } else {
-            destAirportID = Integer.parseInt(destAirport);
+            delayTime = Float.parseFloat(destAirport);
         }
     }
+
+
 }
