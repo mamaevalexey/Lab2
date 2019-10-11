@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class AirportIDWritable implements WritableComparable<AirportIDWritable> {
     private int airportID;
+    private int dataSet; // 0 for 
 
     public AirportIDWritable(int airportID) {
         this.airportID = airportID;
