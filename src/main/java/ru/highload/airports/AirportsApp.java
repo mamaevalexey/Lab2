@@ -15,16 +15,15 @@ public class AirportsApp {
         job.setJarByClass(AirportsApp.class);
         job.setJobName("Airports JoinJob");
 
-        // FIXME:
-        MultipleInputs.addInputPath(job, new Path(args[0]), TextInputFormat.class, CallsJoinMapper.class);
-        MultipleInputs.addInputPath(job, new Path(args[1]), TextInputFormat.class, SystemsJoinMapper.class);
+        MultipleInputs.addInputPath(job, new Path(args[0]), TextInputFormat.class, FlightMapper.class);
+        MultipleInputs.addInputPath(job, new Path(args[1]), TextInputFormat.class, AirportMapper.class);
         FileOutputFormat.setOutputPath(job, new Path(args[2]));
 
         // FIXME:
-        job.setPartitionerClass(TextPair.FirstPartitioner.class);
-        job.setGroupingComparatorClass(TextPair.FirstComparator.class);
-        job.setReducerClass(JoinReducer.class);
-        job.setMapOutputKeyClass(TextPair.class);
+        job.setPartitionerClass(AirportIDWritableComparable.class);
+        job.setGroupingComparatorClass(AirportIDComparator.class);
+        job.setReducerClass(AirportReducer.class);
+        job.setMapOutputKeyClass(Text.class);
 
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
@@ -39,4 +38,4 @@ public class AirportsApp {
 // в +
 //в2 +
 // г +
-// д
+// д +
