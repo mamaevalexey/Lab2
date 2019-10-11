@@ -19,9 +19,12 @@ public class AirportIDWritableComparable implements WritableComparable<AirportID
 
     @Override
     public int compareTo(AirportIDWritableComparable o) {
-        if (airportID == o.airportID)
+        return (airportID < o.airportID ? -1 :
+                (airportID > o.airportID ? 1 :
+                        Integer.compare(dataSet, o.dataSet)));
+        /*if (airportID == o.airportID)
             return dataSet - o.dataSet;
-        return airportID - o.airportID;
+        return airportID - o.airportID;*/
     }
 
     public int getAirportID() {
