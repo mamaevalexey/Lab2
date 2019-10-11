@@ -37,6 +37,6 @@ public class AirportsApp {
 // а +
 // б +
 // в +
-//в2
+//в2 +
 // г +
 // д
