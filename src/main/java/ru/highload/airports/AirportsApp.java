@@ -22,7 +22,7 @@ public class AirportsApp {
         job.setPartitionerClass(AirportPartitioner.class);
         job.setGroupingComparatorClass(AirportIDComparator.class);
         job.setReducerClass(AirportReducer.class);
-        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputKeyClass(AirportIDWritableComparable.class);
 
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
