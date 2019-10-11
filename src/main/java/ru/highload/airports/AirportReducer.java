@@ -33,7 +33,11 @@ public class AirportReducer extends Reducer<AirportIDWritableComparable, Text, T
         }
 
         if (count != 0) {
-            context.write(airport, );
+            context.write(airport,
+                    new Text(String.join(", ",
+                            String.valueOf(minDelay),
+                            String.valueOf(minDelay),
+                            String.valueOf(delaySum / count))));
         }
 
     }
