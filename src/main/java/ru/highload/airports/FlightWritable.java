@@ -37,11 +37,13 @@ public class FlightWritable implements Writable {
 
     @Override
     public void write(DataOutput dataOutput) throws IOException {
-
+        dataOutput.writeInt(destAirportID);
+        dataOutput.writeFloat(delayTime);
     }
 
     @Override
     public void readFields(DataInput dataInput) throws IOException {
-
+        destAirportID = dataInput.readInt();
+        delayTime = dataInput.readFloat();
     }
 }
