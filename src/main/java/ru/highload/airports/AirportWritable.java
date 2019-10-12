@@ -15,6 +15,7 @@ public class AirportWritable implements Writable {
         String[] cols = text.toString().split(",");
         String airport = cols[0].replaceAll("\"", "");
         String name = cols[1].replaceAll("\"", "");
+
         if (airport.equals("Code")) {
             airportID = -1;
         } else {
