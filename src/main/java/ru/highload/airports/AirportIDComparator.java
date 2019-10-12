@@ -6,11 +6,11 @@ import org.apache.hadoop.io.WritableComparator;
 public class AirportIDComparator extends WritableComparator {
 
     protected AirportIDComparator(){
-        super(AirportIDWritableComparable.class, true);
+        super(JoinKeyWritableComparable.class, true);
     }
 
     @Override
     public int compare(WritableComparable a, WritableComparable b) {
-        return ((AirportIDWritableComparable) a).getAirportID() - ((AirportIDWritableComparable) b).getAirportID();
+        return ((JoinKeyWritableComparable) a).getAirportID() - ((JoinKeyWritableComparable) b).getAirportID();
     }
 }

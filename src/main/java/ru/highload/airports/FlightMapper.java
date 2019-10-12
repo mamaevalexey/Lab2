@@ -6,7 +6,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
-public class FlightMapper extends Mapper<LongWritable, Text, AirportIDWritableComparable, Text> {
+public class FlightMapper extends Mapper<LongWritable, Text, JoinKeyWritableComparable, Text> {
     private static final float EPS = 1e-9f;
     private static final int DEST_AIRPORT_INDEX = 14;
     private static final int DELAY_INDEX = 18;
@@ -36,7 +36,7 @@ public class FlightMapper extends Mapper<LongWritable, Text, AirportIDWritableCo
         if (Math.abs(delayTime - 0.f) < EPS)   // delayTime == 0
             return;
 
-        context.write(new AirportIDWritableComparable(destAirportID, 1),
+        context.write(new JoinKeyWritableComparable(destAirportID, 1),
                 new Text(String.valueOf(delayTime)));
     }
 }

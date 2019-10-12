@@ -6,20 +6,20 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class AirportIDWritableComparable implements WritableComparable<AirportIDWritableComparable> {
+public class JoinKeyWritableComparable implements WritableComparable<JoinKeyWritableComparable> {
     private int airportID;
     private int dataSet; // 0 for airport, 1 for flight
 
-    public AirportIDWritableComparable() {
+    public JoinKeyWritableComparable() {
     }
 
-    public AirportIDWritableComparable(int airportID, int dataSet) {
+    public JoinKeyWritableComparable(int airportID, int dataSet) {
         this.airportID = airportID;
         this.dataSet = dataSet;
     }
 
     @Override
-    public int compareTo(AirportIDWritableComparable o) {
+    public int compareTo(JoinKeyWritableComparable o) {
         if (airportID == o.airportID) {
             return dataSet - o.dataSet;
         }

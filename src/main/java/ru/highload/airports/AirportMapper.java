@@ -6,7 +6,11 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
-public class AirportMapper extends Mapper<LongWritable, Text, AirportIDWritableComparable, Text> {
+public class AirportMapper extends Mapper<LongWritable, Text, JoinKeyWritableComparable, Text> {
+    private static final String AIRPORT_ID_COLUMN_NAME = "Code";
+    private static final String AIRPORT_NAME_COLUMN_NAME = "Description";
+
+
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
@@ -14,10 +18,10 @@ public class AirportMapper extends Mapper<LongWritable, Text, AirportIDWritableC
         if (cols.length != 2 && cols.length != 3) {
             return;
         }
-        if (cols[0].equals("Code")) {
+        if (cols[0].equals(AIRPORT_ID_COLUMN_NAME)) {
             return;
         }
-        if (cols[1].equals("Description")) {
+        if (cols[1].equals(AIRPORT_NAME_COLUMN_NAME)) {
             return;
         }
 
@@ -28,7 +32,7 @@ public class AirportMapper extends Mapper<LongWritable, Text, AirportIDWritableC
             airportName += cols[2];
         }
 
-        context.write(new AirportIDWritableComparable(airportID, 0),
+        context.write(new JoinKeyWritableComparable(airportID, 0),
                       new Text(airportName));
 
     }
