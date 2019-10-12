@@ -11,8 +11,6 @@ public class AirportIDComparator extends WritableComparator {
 
     @Override
     public int compare(WritableComparable a, WritableComparable b) {
-        int leftAirportID = ((AirportIDWritableComparable) a).getAirportID();
-        int rightAirportID = ((AirportIDWritableComparable) b).getAirportID();
-        return Integer.compare(leftAirportID, rightAirportID);
+        return ((AirportIDWritableComparable) a).getAirportID() - ((AirportIDWritableComparable) b).getAirportID();
     }
 }
