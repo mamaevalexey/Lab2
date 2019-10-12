@@ -16,11 +16,17 @@ public class AirportWritable implements Writable {
         String airport = cols[0].replaceAll("\"", "");
         String name = cols[1].replaceAll("\"", "");
 
+        if (cols.length > 2) {
+            name += cols[2].replaceAll("\"", "");
+        }
+        name += ",";
+
         if (airport.equals("Code")) {
             airportID = -1;
         } else {
             airportID = Integer.parseInt(airport);
         }
+
         if (name.equals("Description")) {
             airportName = "";
         } else {

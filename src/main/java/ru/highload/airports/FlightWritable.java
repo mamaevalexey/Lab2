@@ -8,24 +8,30 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 public class FlightWritable implements Writable {
-    private static final float EPS = 0.00001f;
+    private static final float EPS = 1e-9;
+    private static final int DEST_AIRPORT_INDEX = 14;
+    private static final int DELAY_INDEX = 18;
+    private static final int CANCELLED_INDEX = 19;
+
+    private static final String DEST_AIRPORT_COLUMN_NAME = "DEST_AIRPORT_ID";
+    private static final String DELAY_COLUMN_NAME = "ARR_DELAY_NEW";
 
     private int destAirportID;
     private float delayTime;
 
     public FlightWritable(Text text) {
         String[] cols = text.toString().split(",");
-        String destAirport = cols[14].replaceAll("\"", "");
-        String delay = cols[18].replaceAll("\"", "");
-        String cancelled = cols[19].replaceAll("\"", "");
+        String destAirport = cols[DEST_AIRPORT_INDEX].replaceAll("\"", "");
+        String delay = cols[DELAY_INDEX].replaceAll("\"", "");
+        String cancelled = cols[CANCELLED_INDEX].replaceAll("\"", "");
 
-        if (destAirport.equals("DEST_AIRPORT_ID")) {
+        if (destAirport.equals(DEST_AIRPORT_COLUMN_NAME)) {
             destAirportID = -1;
         } else {
             destAirportID = Integer.parseInt(destAirport);
         }
 
-        if (delay.equals("ARR_DELAY_NEW") || delay.equals("") || Math.abs(Float.parseFloat(cancelled) - 1.f) < EPS) {
+        if (delay.equals(DELAY_COLUMN_NAME) || delay.equals("") || Math.abs(Float.parseFloat(cancelled) - 1.f) < EPS) {
             delayTime = -1.f;
         } else {
             delayTime = Float.parseFloat(delay);
