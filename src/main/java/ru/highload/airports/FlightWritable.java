@@ -17,6 +17,7 @@ public class FlightWritable implements Writable {
         String delay = cols[18].replaceAll("\"", "");
         String cancelled = cols[19].replaceAll("\"", "");
 
+        if(cols.length != 23)
         for(int i = 0; i < cols.length; i++){
             System.out.println(i + ": " + cols[i]);
         }
