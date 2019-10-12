@@ -9,9 +9,20 @@ import java.io.IOException;
 public class AirportMapper extends Mapper<LongWritable, Text, AirportIDWritableComparable, Text> {
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-        String[] cols = text.toString().split(",");
-        String airport = cols[0].replaceAll("\"", "");
-        String name = cols[1].replaceAll("\"", "");
+
+        String []cols = CSVParser.makeCols(value.toString());
+        if (cols.length != 2 && cols.length != 3){
+            return;
+        }
+        if (cols[0].equals("Code")){
+            return;
+        }
+        if (cols[1].equals("Description")){
+            return;
+        }
+        int airportID = Integer.parseInt(cols[0]);
+        String airportName = cols[1];
+
 
         if (cols.length > 2) {
             name += cols[2].replaceAll("\"", "");
@@ -29,9 +40,9 @@ public class AirportMapper extends Mapper<LongWritable, Text, AirportIDWritableC
             airportName = name;
         }
 
-        if (airport.getAirportID() != -1 && !airport.getAirportName().equals("")) {
-            context.write(new AirportIDWritableComparable(airport.getAirportID(), 0),
-                    new Text(airport.getAirportName()));
+        if (airportID != -1 && !airportName.equals("")) {
+            context.write(new AirportIDWritableComparable(airportID, 0),
+                    new Text(airportName));
         }
     }
 }
