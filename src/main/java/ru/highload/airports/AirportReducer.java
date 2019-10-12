@@ -18,13 +18,10 @@ public class AirportReducer extends Reducer<AirportIDWritableComparable, Text, T
         int count = 0;
 
         Text airport = new Text(iter.next());
-        /*if (Character.isDigit(airport.toString().charAt(0)))
-            return;*/
-        System.out.println("Airport: " + airport);
-
+        //System.out.println("Airport: " + airport);
         while (iter.hasNext()) {
             Text delayText = iter.next();
-            System.out.println("Delay: " + delayText);
+            //System.out.println("Delay: " + delayText);
             float delay = Float.parseFloat(delayText.toString());
 
             if (delay > maxDelay)
