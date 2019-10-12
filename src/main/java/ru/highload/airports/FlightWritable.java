@@ -24,7 +24,7 @@ public class FlightWritable implements Writable {
         if (delay.equals("ARR_DELAY_NEW") || delay.equals("") || Float.parseFloat(cancelled) == 1.0) {
             delayTime = -1;
         } else {
-            delayTime = Float.parseFloat(destAirport);
+            delayTime = Float.parseFloat(delay);
             if (delayTime == 0.0)
                 delayTime = -1;
         }
