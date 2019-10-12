@@ -18,6 +18,7 @@ public class AirportReducer extends Reducer<AirportIDWritableComparable, Text, T
         int count = 0;
 
         Text airport = new Text(iter.next());
+        if(airport.toString()[0])
         System.out.println("Airport: " + airport);
 
         while (iter.hasNext()) {
