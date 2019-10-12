@@ -20,24 +20,12 @@ public class AirportMapper extends Mapper<LongWritable, Text, AirportIDWritableC
         if (cols[1].equals("Description")){
             return;
         }
+
         int airportID = Integer.parseInt(cols[0]);
         String airportName = cols[1];
 
-
         if (cols.length > 2) {
-            name += cols[2].replaceAll("\"", "");
-        }
-
-        if (airport.equals("Code")) {
-            airportID = -1;
-        } else {
-            airportID = Integer.parseInt(airport);
-        }
-
-        if (name.equals("Description")) {
-            airportName = "";
-        } else {
-            airportName = name;
+            airportName += cols[2];
         }
 
         if (airportID != -1 && !airportName.equals("")) {
