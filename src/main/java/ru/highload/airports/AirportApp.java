@@ -9,10 +9,10 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
 
-public class AirportsApp {
+public class AirportApp {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         Job job = Job.getInstance();
-        job.setJarByClass(AirportsApp.class);
+        job.setJarByClass(AirportApp.class);
         job.setJobName("Airports JoinJob");
 
         MultipleInputs.addInputPath(job, new Path(args[0]), TextInputFormat.class, FlightMapper.class);

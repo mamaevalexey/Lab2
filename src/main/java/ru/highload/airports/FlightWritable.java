@@ -8,7 +8,7 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 public class FlightWritable implements Writable {
-    private static final float EPS = 1e-9;
+    private static final float EPS = 1e-9f;
     private static final int DEST_AIRPORT_INDEX = 14;
     private static final int DELAY_INDEX = 18;
     private static final int CANCELLED_INDEX = 19;
@@ -35,7 +35,7 @@ public class FlightWritable implements Writable {
             delayTime = -1.f;
         } else {
             delayTime = Float.parseFloat(delay);
-            if (Math.abs(delayTime - 0.f) < EPS)
+            if (Math.abs(delayTime - 0.f) < EPS)   // delayTime == 0
                 delayTime = -1.f;
         }
     }

@@ -19,7 +19,6 @@ public class AirportWritable implements Writable {
         if (cols.length > 2) {
             name += cols[2].replaceAll("\"", "");
         }
-        name += ",";
 
         if (airport.equals("Code")) {
             airportID = -1;

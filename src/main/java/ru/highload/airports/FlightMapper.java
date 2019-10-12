@@ -13,6 +13,7 @@ public class FlightMapper extends Mapper<LongWritable, Text, AirportIDWritableCo
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         FlightWritable flight = new FlightWritable(value);
 
+        //                                     delayTime != -1
         if (flight.getDestAirportID() != -1 && Math.abs(flight.getDelayTime() + 1.f) >= EPS) {
             context.write(new AirportIDWritableComparable(flight.getDestAirportID(), 1),
                     new Text(String.valueOf(flight.getDelayTime())));
