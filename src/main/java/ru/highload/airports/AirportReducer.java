@@ -40,7 +40,7 @@ public class AirportReducer extends Reducer<AirportIDWritableComparable, Text, T
             context.write(airport,
                     new Text(String.join(", ",
                             String.valueOf(minDelay),
-                            String.valueOf(minDelay),
+                            String.valueOf(maxDelay),
                             String.valueOf(delaySum / count))));
         }
 
