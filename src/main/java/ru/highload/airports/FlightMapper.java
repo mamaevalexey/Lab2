@@ -7,16 +7,36 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 
 public class FlightMapper extends Mapper<LongWritable, Text, AirportIDWritableComparable, Text> {
-    private static final float EPS = 0.00001f;
+    private static final float EPS = 1e-9f;
+    private static final int DEST_AIRPORT_INDEX = 14;
+    private static final int DELAY_INDEX = 18;
+    private static final int CANCELLED_INDEX = 19;
+
+    private static final String DEST_AIRPORT_COLUMN_NAME = "DEST_AIRPORT_ID";
+    private static final String DELAY_COLUMN_NAME = "ARR_DELAY_NEW";
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-        FlightWritable flight = new FlightWritable(value);
+        String[] cols = CSVParser.makeCols(value.toString());
 
-        //                                     delayTime != -1
-        if (flight.getDestAirportID() != -1 && Math.abs(flight.getDelayTime() + 1.f) >= EPS) {
-            context.write(new AirportIDWritableComparable(flight.getDestAirportID(), 1),
-                    new Text(String.valueOf(flight.getDelayTime())));
+        String destAirport = cols[DEST_AIRPORT_INDEX];
+        String delay = cols[DELAY_INDEX];
+        String cancelled = cols[CANCELLED_INDEX];
+
+        if (destAirport.equals(DEST_AIRPORT_COLUMN_NAME)) {
+            return;
         }
+        if (delay.equals(DELAY_COLUMN_NAME) || delay.equals("") || Math.abs(Float.parseFloat(cancelled) - 1.f) < EPS) {
+            return;
+        }
+
+        int destAirportID = Integer.parseInt(destAirport);
+        float delayTime = Float.parseFloat(delay);
+
+        if (Math.abs(delayTime - 0.f) < EPS)   // delayTime == 0
+            return;
+
+        context.write(new AirportIDWritableComparable(destAirportID, 1),
+                new Text(String.valueOf(delayTime)));
     }
 }

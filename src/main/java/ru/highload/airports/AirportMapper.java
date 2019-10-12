@@ -10,14 +10,14 @@ public class AirportMapper extends Mapper<LongWritable, Text, AirportIDWritableC
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
-        String []cols = CSVParser.makeCols(value.toString());
-        if (cols.length != 2 && cols.length != 3){
+        String[] cols = CSVParser.makeCols(value.toString());
+        if (cols.length != 2 && cols.length != 3) {
             return;
         }
-        if (cols[0].equals("Code")){
+        if (cols[0].equals("Code")) {
             return;
         }
-        if (cols[1].equals("Description")){
+        if (cols[1].equals("Description")) {
             return;
         }
 
@@ -28,9 +28,8 @@ public class AirportMapper extends Mapper<LongWritable, Text, AirportIDWritableC
             airportName += cols[2];
         }
 
-        if (airportID != -1 && !airportName.equals("")) {
-            context.write(new AirportIDWritableComparable(airportID, 0),
-                    new Text(airportName));
-        }
+        context.write(new AirportIDWritableComparable(airportID, 0),
+                      new Text(airportName));
+
     }
 }
