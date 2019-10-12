@@ -8,6 +8,8 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 public class FlightWritable implements Writable {
+    private static final float EPS = 0.00001f;
+
     private int destAirportID;
     private float delayTime;
 
@@ -17,21 +19,18 @@ public class FlightWritable implements Writable {
         String delay = cols[18].replaceAll("\"", "");
         String cancelled = cols[19].replaceAll("\"", "");
 
-
-        System.out.println(cols[14] + ": " + cols[18]);
-
         if (destAirport.equals("DEST_AIRPORT_ID")) {
             destAirportID = -1;
         } else {
             destAirportID = Integer.parseInt(destAirport);
         }
 
-        if (delay.equals("ARR_DELAY_NEW") || delay.equals("") || Float.parseFloat(cancelled) == 1.0) {
-            delayTime = -1;
+        if (delay.equals("ARR_DELAY_NEW") || delay.equals("") || Math.abs(Float.parseFloat(cancelled) - 1.f) < EPS) {
+            delayTime = -1.f;
         } else {
             delayTime = Float.parseFloat(delay);
-            if (delayTime == 0.0)
-                delayTime = -1;
+            if (Math.abs(delayTime - 0.f) < EPS)
+                delayTime = -1.f;
         }
     }
 
