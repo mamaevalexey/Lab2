@@ -36,10 +36,12 @@ public class AirportIDWritableComparable implements WritableComparable<AirportID
     @Override
     public void write(DataOutput dataOutput) throws IOException {
         dataOutput.writeInt(airportID);
+        dataOutput.writeInt(dataSet);
     }
 
     @Override
     public void readFields(DataInput dataInput) throws IOException {
         airportID = dataInput.readInt();
+        dataSet = dataInput.readInt();
     }
 }
