@@ -1,9 +1,9 @@
 ru/highload/airports/AirportIDComparator.class
 ru/highload/airports/AirportMapper.class
+ru/highload/airports/AirportApp.class
 ru/highload/airports/AirportIDWritableComparable.class
 ru/highload/airports/AirportWritable.class
 ru/highload/airports/AirportReducer.class
 ru/highload/airports/FlightWritable.class
-ru/highload/airports/AirportsApp.class
 ru/highload/airports/FlightMapper.class
 ru/highload/airports/AirportPartitioner.class
