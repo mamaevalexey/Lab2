@@ -9,7 +9,25 @@ import java.io.IOException;
 public class AirportMapper extends Mapper<LongWritable, Text, AirportIDWritableComparable, Text> {
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-        AirportWritable airport = new AirportWritable(value);
+        String[] cols = text.toString().split(",");
+        String airport = cols[0].replaceAll("\"", "");
+        String name = cols[1].replaceAll("\"", "");
+
+        if (cols.length > 2) {
+            name += cols[2].replaceAll("\"", "");
+        }
+
+        if (airport.equals("Code")) {
+            airportID = -1;
+        } else {
+            airportID = Integer.parseInt(airport);
+        }
+
+        if (name.equals("Description")) {
+            airportName = "";
+        } else {
+            airportName = name;
+        }
 
         if (airport.getAirportID() != -1 && !airport.getAirportName().equals("")) {
             context.write(new AirportIDWritableComparable(airport.getAirportID(), 0),
